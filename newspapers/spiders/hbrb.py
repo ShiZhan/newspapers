@@ -15,8 +15,11 @@ class HbrbSpider(CrawlSpider):
     def parse_item(self, response):
         hxs = HtmlXPathSelector(response)
         i = NewspapersItem()
+
         i['title'] = hxs.select('//table[@id=\'Table17\']/tr[2]/td/text()').extract()
         i['text'] = hxs.select('//div[@id=\'copytext\']/font/text()').extract()
         i['category'] = hxs.select('//table[@id=\'Table16\']/tr[1]/td[3]/text()').extract()
-        i['date'] = hxs.select('//table[@id=\'Table16\']/tr[1]/td[5]/text()').extract()
+        date_raw = hxs.select('//table[@id=\'Table16\']/tr[1]/td[5]/text()').extract()
+        i['date'] = ' '.join(date_raw).split()
+
         return i
