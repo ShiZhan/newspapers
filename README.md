@@ -7,7 +7,7 @@ This project provides a web crawler, collects online newspaper data and stores i
 
 Crawler based on sophisticated [scrapy](https://github.com/scrapy/scrapy) platform.
 
-Task control index page created using [tornado](http://www.tornadoweb.org/).
+Task control by creating local index page.
 
-Databases using [mongodb](http://www.mongodb.org/).
+Databases/WIP using [mongodb](http://www.mongodb.org/).
 
