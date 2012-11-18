@@ -8,8 +8,9 @@ from scrapy.item import Item, Field
 class NewspapersItem(Item):
     # define the fields for your item here like:
     # name = Field()
-    title = Field()
-    text = Field()
+    subtitle = Field()
+    title    = Field()
+    text     = Field()
     category = Field()
-    date = Field()
+    date     = Field()
     pass
