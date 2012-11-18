@@ -1,0 +1,10 @@
+#!/bin/sh -
+"exec" "python" "-O" "$0" "$@"
+
+import sys
+
+def generate_link(link_string):
+  link = "<a href=\"" + link_string + "\">" + link_string + "</a>"
+  return link
+
+print generate_link("http://hbrb.cnhubei.com/html/hbrb/20100101/index.html")
