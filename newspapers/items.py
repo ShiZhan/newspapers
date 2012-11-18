@@ -10,5 +10,6 @@ class NewspapersItem(Item):
     # name = Field()
     title = Field()
     text = Field()
+    category = Field()
     date = Field()
     pass
