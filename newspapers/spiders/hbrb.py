@@ -6,7 +6,7 @@ from newspapers.items import NewspapersItem
 class HbrbSpider(CrawlSpider):
     name = 'hbrb'
     allowed_domains = ['hbrb.cnhubei.com']
-    start_urls = ['http://hbrb.cnhubei.com/html/hbrb/20100101/hbrb1.html']
+    start_urls = ['http://hbrb.cnhubei.com/html/hbrb/20120101/index.html']
 
     rules = (
         Rule(SgmlLinkExtractor(allow=r'html\/hbrb\/[0-9]{8}\/hbrb[0-9]{1,}\.html'), callback='parse_item', follow=True),
