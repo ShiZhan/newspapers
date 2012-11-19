@@ -1,6 +1,3 @@
-#!/bin/sh -
-"exec" "python" "-O" "$0" "$@"
-
 import sys
 
 with open(sys.argv[1]) as f:
