@@ -5,7 +5,7 @@ from newspapers.items import NewspapersItem
 
 class HbrbSpider(CrawlSpider):
     name = 'hbrb'
-    download_delay = 2
+    download_delay = 1.5
 
     allowed_domains = ['hbrb.cnhubei.com', 'localhost']
     start_urls = ['http://localhost/2012test.html']

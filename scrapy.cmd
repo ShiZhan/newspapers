@@ -1,0 +1,1 @@
+@echo Created by Shi.Zhan @ 2012&&@echo running scrapy command&&python e:\Works\hive\scrapy.git\bin\scrapy %1 %2 %3 %4 %5 %6
