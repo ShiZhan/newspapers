@@ -3,9 +3,9 @@ newspapers
 
 newspaper data collector
 
-This project provides a web crawler, collects online newspaper data and stores into document database.
+A web crawler for collecting online newspaper data and stores into document database.
 
-Crawler based on sophisticated [scrapy](https://github.com/scrapy/scrapy) platform.
+Crawler based on [scrapy](https://github.com/scrapy/scrapy) framework.
 
 Task control by creating local index page.
 
