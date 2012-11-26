@@ -9,7 +9,7 @@ if (not valid_date.search(from_date)) or (not valid_date.search(to_date)) or (in
     print "invalid parameter, input as \'command\' yyyymmdd (<) yyyymmdd."
     sys.exit(1)
 
-print "<h1>Generate cjmp.cnhan.com link from " + from_date + " to " + to_date + "</h1><br/>"
+print "<h1>Generate www.cankaoxiaoxi.com link from " + from_date + " to " + to_date + "</h1><br/>"
 
 days_in_month = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 yyyy = int(from_date[:4])
@@ -23,5 +23,6 @@ while yyyy <= int(to_date[:4]):
             if int(date) >= int(from_date) and int(date) <= int(to_date):
                 # need 'YYYY-MM/DD'
                 date_link = '%04d-%02d/%02d' % (yyyy, mm, dd)
-                print "<a href=\"http://cjmp.cnhan.com/whwb/html/" + date_link + "/node_22.htm\">" + date + "</a>"
+                # http://www.cankaoxiaoxi.com/history/index/2012-11/27-00.shtml
+                print "<a href=\"http://www.cankaoxiaoxi.com/history/index/" + date_link + "-00.shtml\">" + date + "</a>"
     yyyy += 1
