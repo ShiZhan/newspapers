@@ -8,7 +8,7 @@ class WhwbSpider(CrawlSpider):
     download_delay = 1.5
 
     allowed_domains = ['cjmp.cnhan.com', 'localhost']
-    start_urls = ['http://localhost/whwb.html']
+    start_urls = ['http://localhost:9080/whwb.html']
     # allowed_domains = ['cjmp.cnhan.com']
     # start_urls = ['http://cjmp.cnhan.com/whwb/html/2012-11/20/node_22.htm']
 
