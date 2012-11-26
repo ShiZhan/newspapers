@@ -7,10 +7,10 @@ class WhwbSpider(CrawlSpider):
     name = 'whwb'
     download_delay = 1.5
 
-    # allowed_domains = ['cjmp.cnhan.com', 'localhost']
-    # start_urls = ['http://localhost/2012whwb.html']
-    allowed_domains = ['cjmp.cnhan.com']
-    start_urls = ['http://cjmp.cnhan.com/whwb/html/2012-11/20/node_22.htm']
+    allowed_domains = ['cjmp.cnhan.com', 'localhost']
+    start_urls = ['http://localhost/whwb.html']
+    # allowed_domains = ['cjmp.cnhan.com']
+    # start_urls = ['http://cjmp.cnhan.com/whwb/html/2012-11/20/node_22.htm']
 
     rules = (
         # Rule(SgmlLinkExtractor(allow=r'content_[0-9]+.htm'), callback='parse_item', follow=True), this also works
@@ -23,7 +23,7 @@ class WhwbSpider(CrawlSpider):
         i = NewspapersItem()
 
         i['subtitle'] = hxs.select('//table[5]/tbody/tr[3]/td/table/tbody/tr/td/span[1]/text()').extract()
-        i['title']    = hxs.select('//table[5]/tbody/tr[3]/td/table/tbody/tr/td/strong/text()').extract()
+        i['title']    = hxs.select('//strong[@style]/text()').extract()
         i['text']     = hxs.select('//div[@id=\'ozoom\']/p/text()').extract()
         i['category'] = hxs.select('//td[@class=\'px12\'][1]/strong/text()').extract()
         date_raw      = hxs.select('//span[@class=\'default\']/strong/font/text()').extract()
