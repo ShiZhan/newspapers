@@ -2,6 +2,8 @@ import sys
 import pymongo
 import json
 
+print "import crawled json file into mongodb 'newspapers' database."
+
 if len(sys.argv) < 3:
     print "input as [collection] [json_file]"
     exit(1)
@@ -16,7 +18,6 @@ try:
         items = json.loads(json_file.read())
         json_file.close()
 except Exception, e:
-    print "input as [collection] [json_file]"
     raise e
 
 for item in items:
