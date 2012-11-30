@@ -1,32 +1,30 @@
-#!/usr/bin/python
 #coding=utf-8
+from scrapy.spider import BaseSpider
 from scrapy.selector import HtmlXPathSelector
-from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor
-from scrapy.contrib.spiders import CrawlSpider, Rule
 from newspapers.items import NewspapersItem
+import json
 
-class CkxxSpider(CrawlSpider):
-    name = 'ckxx'
-    download_delay = 1.5
+class CkxxSpider(BaseSpider):
+    name = "ckxx"
+    allowed_domains = ["cankaoxiaoxi.com"]
+    start_urls = (
+        'http://china.cankaoxiaoxi.com/2011/0830/1499.shtml',
+        )
+    download_delay = 1
 
-    allowed_domains = ['cankaoxiaoxi.com', 'localhost']
-    start_urls = ['http://mil.cankaoxiaoxi.com/2012/1129/127185.shtml']
-
-    rules = (
-        Rule(SgmlLinkExtractor(allow=r'/[0-9]{4}/[0-9]{4}/[0-9]+.shtml'), callback='parse_item', follow=True),
-    )
-
-    def parse_item(self, response):
+    def parse(self, response):
         hxs = HtmlXPathSelector(response)
+        content = hxs.select('//div[contains(@class,"bg-content")]')
         i = NewspapersItem()
-        i['title'] = hxs.select('//h2[@class="h2 b fz-24 mar-b-20"]/text()').extract()
+        i['title'] = content.select('.//h2/text()').extract()
         # some page has author following date
-        i['date']  = hxs.select('//span[@class="cor666"]/text()[1]').extract
+        source_raw = content.select('.//span[@class="cor666"]/text()').extract()
+        i['date'] = source_raw[0]
         # just use subtitle for abstract
-        i['subtitle'] = hxs.select('//div[@class="bd-blue bg-white pad-10 mar-b-20 cont-detail"]/p/text()').extract()
+        i['subtitle'] = content.select('.//div[contains(@class,"cont-detail") and not(@id)]/p/text()').extract()
         # contains "报道" & "延伸阅读"
-        i['text']     = hxs.select('//div[@class="fs-small cont-detail det" and @id="ctrlfscont"]').extract()
-        i['category'] = hxs.select('//span[@class="cor-blue"]/text()').extract()
-        i['editor']   = hxs.select('//span[@class="f-r cor666"]/text()').extract()
+        i['text']     = content.select('.//div[contains(@class,"cont-detail") and @id="ctrlfscont"]').extract()
+        i['category'] = content.select('.//span[@class="cor-blue"]/text()').extract()
+        i['editor']   = content.select('.//span[@class="f-r cor666"]/text()').extract()
 
         return i
