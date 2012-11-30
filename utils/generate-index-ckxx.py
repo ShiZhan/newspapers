@@ -1,28 +1,33 @@
-import sys, re
+#!/usr/bin/env python
+import re
+import sys
+import urllib2
+from lxml import html
 
-valid_date = re.compile('^(19|20)[0-9][0-9](0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])$')
+valid_date = re.compile('^[0-9]+$')
 
-from_date = sys.argv[1]
-to_date   = sys.argv[2]
+if len(sys.argv) < 3:
+    print "input as \'command\' [from page] (<) [to page]."
+    print "page will be grabbed from http://www.cankaoxiaoxi.com/roll"
+    exit(1)
 
-if (not valid_date.search(from_date)) or (not valid_date.search(to_date)) or (int(to_date) - int(from_date))<0:
-    print "invalid parameter, input as \'command\' yyyymmdd (<) yyyymmdd."
-    sys.exit(1)
+from_page = sys.argv[1]
+to_page   = sys.argv[2]
 
-print "<h1>Generate www.cankaoxiaoxi.com link from " + from_date + " to " + to_date + "</h1><br/>"
+if (not valid_date.search(from_page)) or (not valid_date.search(to_page)) or (int(to_page) - int(from_page))<0:
+    print "invalid parameter."
+    exit(1)
 
-days_in_month = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-yyyy = int(from_date[:4])
-while yyyy <= int(to_date[:4]):
-    for mm in range(12):
-        days = days_in_month[mm]
-        mm += 1
-        for dd in range(days):
-            dd += 1
-            date = '%04d%02d%02d' % (yyyy, mm, dd)
-            if int(date) >= int(from_date) and int(date) <= int(to_date):
-                # need 'YYYY-MM/DD'
-                date_link = '%04d-%02d/%02d' % (yyyy, mm, dd)
-                # http://www.cankaoxiaoxi.com/history/index/2012-11/27-00.shtml
-                print "<a href=\"http://www.cankaoxiaoxi.com/history/index/" + date_link + "-00.shtml\">" + date + "</a>"
-    yyyy += 1
+print "<h1>Grabbed www.cankaoxiaoxi.com link from page %s to %s. </h1><br/>" % (from_page, to_page)
+# 2012/12/1: http://www.cankaoxiaoxi.com/roll/?page=1 ~ http://www.cankaoxiaoxi.com/roll/?page=3461
+for page in range(int(from_page), int(to_page) + 1):
+    page_url = "http://www.cankaoxiaoxi.com/roll/?page=" + str(page)
+    print "<h2>read from %s </h2><br/>" % page_url
+    content = urllib2.urlopen(page_url).read()
+
+    try:
+        content_dom = html.fromstring(content)
+        for report_url in content_dom.xpath("id('tab-cont-1')/div[1]/ul/li/a/attribute::href"):
+            print "<a href=\"%s\">report</a><br/>" % report_url
+    except Exception, e:
+        raise e

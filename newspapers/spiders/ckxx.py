@@ -1,18 +1,21 @@
 #coding=utf-8
-from scrapy.spider import BaseSpider
 from scrapy.selector import HtmlXPathSelector
+from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor
+from scrapy.contrib.spiders import CrawlSpider, Rule
 from newspapers.items import NewspapersItem
-import json
 
-class CkxxSpider(BaseSpider):
-    name = "ckxx"
-    allowed_domains = ["cankaoxiaoxi.com"]
-    start_urls = (
-        'http://china.cankaoxiaoxi.com/2011/0830/1499.shtml',
-        )
+class CkxxSpider(CrawlSpider):
+    name = 'ckxx'
+    allowed_domains = ['cankaoxiaoxi.com']
+    start_urls = ['http://localhost:9080/ckxx.html']
+
     download_delay = 1
 
-    def parse(self, response):
+    rules = (
+        Rule(SgmlLinkExtractor(), callback='parse_item', follow=True),
+    )
+
+    def parse_item(self, response):
         hxs = HtmlXPathSelector(response)
         content = hxs.select('//div[contains(@class,"bg-content")]')
         i = NewspapersItem()

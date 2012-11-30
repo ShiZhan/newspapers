@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import sys, re
 
 valid_date = re.compile('^(19|20)[0-9][0-9](0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])$')
