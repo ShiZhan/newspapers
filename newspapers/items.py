@@ -13,4 +13,5 @@ class NewspapersItem(Item):
     text     = Field()
     category = Field()
     date     = Field()
+    editor   = Field()
     pass
