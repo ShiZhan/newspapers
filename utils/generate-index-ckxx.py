@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import re
 import sys
+import time
 import urllib2
 from lxml import html
 
@@ -31,3 +32,5 @@ for page in range(int(from_page), int(to_page) + 1):
             print "<a href=\"%s\">report</a><br/>" % report_url
     except Exception, e:
         raise e
+
+    time.sleep(2)
