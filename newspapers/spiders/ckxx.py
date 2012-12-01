@@ -12,7 +12,7 @@ class CkxxSpider(CrawlSpider):
     download_delay = 1
 
     rules = (
-        Rule(SgmlLinkExtractor(), callback='parse_item', follow=True),
+        Rule(SgmlLinkExtractor(restrict_xpaths='/html/body/a'), callback='parse_item', follow=False),
     )
 
     def parse_item(self, response):
@@ -20,9 +20,8 @@ class CkxxSpider(CrawlSpider):
         content = hxs.select('//div[contains(@class,"bg-content")]')
         i = NewspapersItem()
         i['title'] = content.select('.//h2/text()').extract()
-        # some page has author following date
-        source_raw = content.select('.//span[@class="cor666"]/text()').extract()
-        i['date'] = source_raw[0]
+        # TODO: some page has author following date
+        i['date'] = content.select('.//span[@class="cor666"]/text()').extract()
         # just use subtitle for abstract
         i['subtitle'] = content.select('.//div[contains(@class,"cont-detail") and not(@id)]/p/text()').extract()
         # contains "报道" & "延伸阅读"
