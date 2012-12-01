@@ -9,7 +9,7 @@ class CkxxSpider(CrawlSpider):
     allowed_domains = ['cankaoxiaoxi.com']
     start_urls = ['http://localhost:9080/ckxx.html']
 
-    download_delay = 1
+    download_delay = 2
 
     rules = (
         Rule(SgmlLinkExtractor(restrict_xpaths='/html/body/a'), callback='parse_item', follow=False),
