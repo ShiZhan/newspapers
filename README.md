@@ -16,11 +16,11 @@ Databases/WIP using [mongodb](http://www.mongodb.org/).
 
 [Hubei Daily](http://hbrb.cnhubei.com/)
 
-1. use "generate-index-hbrb.py [from date] [to date]" to generate index page between specified dates.
+1. use <code>generate-index-hbrb.py [from date: yyyymmdd] [to date]</code> to generate index page between specified dates.
 
-2. use "python -m SimpleHTTPServer 9080 &" to make the index page visible to spider.
+2. use <code>python -m SimpleHTTPServer 9080 &</code> to make the index page visible to spider.
 
-3. run "scrapy crawl whrb" , add parameters, e.g.: "-t json -o foo.json" to collect data.
+3. run <code>scrapy crawl whrb</code> , add parameters, e.g.: "-t json -o foo.json" to collect data.
 
 ## whwb
 
@@ -30,15 +30,15 @@ Exactly the same with hbrb.
 
 ## ckxx
 
-Can Kao Xiao Xi
+[Can Kao Xiao Xi](http://www.cankaoxiaoxi.com/)
 
-1. use "generate-index-ckxx.py [from page] [to page]" to grab individual report URLs from [headline pages](http://www.cankaoxiaoxi.com/roll/).
+1. use <code>generate-index-ckxx.py [from page] [to page]</code> to grab individual report URLs from [headline pages](http://www.cankaoxiaoxi.com/roll/).
 
 2. same as hbrb and whwb.
 
 3. same as hbrb and whwb.
 
-# utilities
+# Utilities
 
 * escaped-unicode-print.py
 
@@ -54,5 +54,5 @@ Can Kao Xiao Xi
 
 * run-server
 
-  Simplify the calling of python internal web server "python -m SimpleHTTPServer" .
+  Simplify the calling of python internal web server <code>python -m SimpleHTTPServer</code> .
 
